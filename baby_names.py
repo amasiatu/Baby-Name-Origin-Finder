@@ -136,7 +136,8 @@ class Names:
 
             has_favorite = False
             while not has_favorite:
-                api_url = 'https://api.api-ninjas.com/v1/babynames?gender={}'.format(gender)
+                api_url = 'https://api.api-ninjas.com/v1/babynames?gender={}'.\
+                    format(gender)
                 response = requests.get(api_url, headers={
                     'X-Api-Key': 'h4wtq1MA0UEtdmEEsvvuSQ==R0uLAaz0WauYOacd'
                     })
