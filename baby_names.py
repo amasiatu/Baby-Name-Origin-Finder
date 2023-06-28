@@ -18,7 +18,7 @@ class Names:
         while not done:
             has_name = input(
                 'Do you have a baby name in mind? (yes/no): '
-                ).lower()
+            ).lower()
 
             while has_name != 'yes' and has_name != 'no':
                 has_name = input('Please answer yes or no: ').lower()
@@ -29,7 +29,7 @@ class Names:
             else:
                 has_country = input(
                     'Do you have a preferred country of origin? (yes/no): '
-                    ).lower()
+                ).lower()
 
                 while has_country != 'yes' and has_country != 'no':
                     has_country = input('Please answer yes or no: ').lower()
@@ -41,7 +41,7 @@ class Names:
 
             choice = input(
                 'Would you like to continue using our Name Finder? (yes/no): '
-                ).lower()
+            ).lower()
 
             while choice != 'yes' and choice != 'no':
                 choice = input('Please answer yes or no: ').lower()
@@ -67,7 +67,7 @@ class Names:
 
             choice = input(
                 'Would you like to choose another name? (yes/no): '
-                ).lower()
+            ).lower()
 
             while choice != 'yes' and choice != 'no':
                 choice = input('Please answer yes or no: ').lower()
@@ -93,10 +93,12 @@ class Names:
                            '(male/female/either): '
                            ).lower()
 
-            while gender != 'male' and gender != 'female' and gender != 'either':
+            while (
+                gender != 'male' and gender != 'female' and gender != 'either'
+            ):
                 gender = input(
                     'Please enter male, female, or either: '
-                    ).lower()
+                ).lower()
 
             if gender == 'either':
                 print(Names.nd.get_top_names(n=5, country_alpha2=origin))
@@ -107,7 +109,7 @@ class Names:
 
             choice = input(
                 'Would you like to choose another country? (yes/no): '
-                ).lower()
+            ).lower()
 
             while choice != 'yes' and choice != 'no':
                 choice = input('Please answer yes or no: ').lower()
@@ -118,7 +120,7 @@ class Names:
     def baby_names(self):
         user_choice = input(
             'Would you like to see a random list of baby names? (yes/no): '
-            ).lower()
+        ).lower()
 
         while user_choice != 'yes' and user_choice != 'no':
             user_choice = input('Please answer yes or no: ').lower()
@@ -127,7 +129,7 @@ class Names:
             gender = input(
                 'What is your preferred gender for the name? '
                 '(boy/girl/neutral): '
-                ).lower()
+            ).lower()
 
             while gender != 'boy' and gender != 'girl' and gender != 'neutral':
                 gender = input('Please enter boy, girl, or neutral: ').lower()
@@ -143,7 +145,9 @@ class Names:
                 else:
                     print("Error:", response.status_code, response.text)
 
-                favorite = input('Do you like any of these names? (yes/no): ').lower()
+                favorite = input(
+                    'Do you like any of these names? (yes/no): '
+                ).lower()
 
                 while favorite != 'yes' and favorite != 'no':
                     favorite = input('Please answer yes or no: ').lower()
