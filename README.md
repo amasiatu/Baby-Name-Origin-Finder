@@ -1,7 +1,7 @@
 ![PEP8 style checker badge](https://github.com/amasiatu/SEO-Week-2-Project/actions/workflows/style.yaml/badge.svg)
 # SEO-Week-2-Project: Baby Name Origin Finder
 
-SEO Tech Developer program Week 2 project created by Alysa Vega and Chinyere Amasiatu.
+SEO Tech Developer program Week 2 project created by Alysa Vega and Chinyere Amasiatu
 
 ## Setup instructions
 
@@ -14,7 +14,7 @@ pip install requests
 ```
 pip install pandas
 ```
-* aqlalchemy
+* sqlalchemy
 ```
 pip install sqlalchemy
 ```
@@ -36,4 +36,4 @@ python3 main.py
 
 ## How the code works
 
-`main.py` uses the Names class in `baby_names.py` to findd baby names for the user and outputs their preferred name's origin or takes a name as input and outputs its origin.
+`main.py` uses the Names class in `baby_names.py` to find baby names for the user and outputs their preferred name's origin or takes a name as input and outputs its origin
