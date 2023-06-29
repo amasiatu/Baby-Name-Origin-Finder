@@ -1,6 +1,4 @@
-import builtins
 import unittest
-from unittest.mock import Mock, patch
 from name_finder import Names
 
 
