@@ -12,14 +12,6 @@ SEO Tech Developer program Week 2 project created by Alysa Vega and Chinyere Ama
 ```
 pip install requests
 ```
-* pandas
-```
-pip install pandas
-```
-* sqlalchemy
-```
-pip install sqlalchemy
-```
 * names-dataset
 ```
 pip install names-dataset
