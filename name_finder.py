@@ -70,7 +70,6 @@ class Names:
             while not name.isalpha():
                 name = input('Please enter a valid name: ').lower()
 
-            #call
             (name, gender, country) = self.get_name_gender_country(name)
             print('The name ' + name +
                   ' originates from', country)
@@ -86,7 +85,7 @@ class Names:
 
             if choice == 'no':
                 done = True
-    
+
     def get_name_gender_country(self, name):
         name = name[0].upper() + name[1:]
         name_info = NameWrapper(Names.nd.search(name)).describe
@@ -94,7 +93,6 @@ class Names:
         gender = name_info[:comma_index]
         country = name_info[comma_index+2:]
         return (name, gender, country)
-
 
     def find_names(self):
         country_codes = Names.nd.get_country_codes(alpha_2=True)
