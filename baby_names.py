@@ -1,6 +1,6 @@
 import requests
-# import pandas as pd
-# import sqlalchemy as db
+import pandas as pd
+import sqlalchemy as db
 from names_dataset import NameDataset, NameWrapper
 
 
@@ -8,8 +8,8 @@ class Names:
     end_message = 'Thank you for using our Name Finder!'
     nd = NameDataset(load_last_names=False)
 
-    # def __init__(self):
-    # create sql table
+    def __init__(self):
+        engine = db.create_engine("put something here")
 
     def start_program(self):
         print('Welcome to our Name Finder!')
@@ -55,14 +55,14 @@ class Names:
         done = False
 
         while not done:
-            name = input('Please enter your preferred name: ')
+            name = input('Please enter your preferred name: ').lower()
 
             while not name.isalpha():
-                name = input('Please enter a valid name: ')
+                name = input('Please enter a valid name: ').lower()
 
             name_info = NameWrapper(Names.nd.search(name)).describe
             comma_index = name_info.find(',')
-            print('The name ' + name + ' originates from', end=' ')
+            print('The name ' + name[0].upper() + name[1:] + ' originates from', end=' ')
             print(name_info[comma_index+2:])
 
             choice = input(
@@ -101,11 +101,18 @@ class Names:
                 ).lower()
 
             if gender == 'either':
-                print(Names.nd.get_top_names(n=5, country_alpha2=origin))
+                names_dict = Names.nd.get_top_names(n=5, country_alpha2=origin)
+                print('Male names popular in', origin + ':', end=' ')
+                print(names_dict[origin]['M'])
+                print('Female names popular in', origin + ':', end=' ')
+                print(names_dict[origin]['F'])
             else:
-                print(Names.nd.get_top_names(
+                names_dict = Names.nd.get_top_names(
                     n=10, gender=gender, country_alpha2=origin
-                    ))
+                )
+                print(gender[0].upper() + gender[1:],
+                      'names popular in', origin + ':', end=' ')
+                print(names_dict[origin][gender[0].upper()])
 
             choice = input(
                 'Would you like to choose another country? (yes/no): '
@@ -142,6 +149,7 @@ class Names:
                     'X-Api-Key': 'h4wtq1MA0UEtdmEEsvvuSQ==R0uLAaz0WauYOacd'
                     })
                 if response.status_code == requests.codes.ok:
+                    print(gender[0].upper() + gender[1:], 'baby names:', end=' ')
                     print(response.text)
                 else:
                     print("Error:", response.status_code, response.text)
