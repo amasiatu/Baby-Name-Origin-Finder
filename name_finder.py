@@ -17,7 +17,8 @@ class Names:
 
     def insert_into_table(self, name, gender, country):
         self.conn.execute("INSERT INTO names_info (NAME,GENDER,COUNTRY) \
-                     VALUES ('{}', '{}', '{}')".format(name, gender, country));
+                     VALUES ('{}', '{}', '{}')".
+                          format(name, gender, country))
 
     def start_program(self):
         print('Welcome to our Name Finder!')
@@ -73,7 +74,8 @@ class Names:
             comma_index = name_info.find(',')
             gender = name_info[:comma_index]
             country = name_info[comma_index+2:]
-            print('The name ' + name[0].upper() + name[1:] + ' originates from', country)
+            print('The name ' + name[0].upper() + name[1:] +
+                  ' originates from', country)
 
             Names.insert_into_table(name, gender, country)
 
@@ -161,7 +163,8 @@ class Names:
                     'X-Api-Key': 'h4wtq1MA0UEtdmEEsvvuSQ==R0uLAaz0WauYOacd'
                     })
                 if response.status_code == requests.codes.ok:
-                    print(gender[0].upper() + gender[1:], 'baby names:', end=' ')
+                    print(gender[0].upper() + gender[1:],
+                          'baby names:', end=' ')
                     print(response.text)
                 else:
                     print("Error:", response.status_code, response.text)
