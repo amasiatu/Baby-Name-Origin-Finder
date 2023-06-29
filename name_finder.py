@@ -10,7 +10,7 @@ class Names:
     def __init__(self):
         self.conn = sqlite3.connect('name_program.db')
         self.conn.execute('''CREATE TABLE IF NOT EXISTS names_info
-                     (ID INT UNSIGNED NOT NULL auto_increment,
+                     (ID INT PRIMARY KEY default NULL,
                      NAME VARCHAR(255) default NULL,
                      GENDER VARCHAR(255) default NULL,
                      COUNTRY VARCHAR(255) default NULL );''')
@@ -75,7 +75,7 @@ class Names:
             country = name_info[comma_index+2:]
             print('The name ' + name[0].upper() + name[1:] + ' originates from', country)
 
-            self.insert_into_table(name, gender, country)
+            Names.insert_into_table(name, gender, country)
 
             choice = input(
                 'Would you like to choose another name? (yes/no): '

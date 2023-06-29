@@ -34,4 +34,4 @@ python3 main.py
 
 ## How the code works
 
-`main.py` uses the Names class in `baby_names.py` to find baby names for the user and outputs their preferred name's origin or takes a name as input and outputs its origin
+`main.py` uses the Names class in `name_finder.py` to find baby names for the user and outputs their preferred name's origin or takes a name as input and outputs its origin

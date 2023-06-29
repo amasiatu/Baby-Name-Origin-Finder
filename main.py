@@ -1,4 +1,4 @@
-from baby_names import Names
+from name_finder import Names
 
-baby_names = Names()
-baby_names.start_program()
+name_program = Names()
+name_program.start_program()
