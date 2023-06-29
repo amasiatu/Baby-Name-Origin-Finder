@@ -28,6 +28,10 @@ pip install names-dataset
 ```
 pip install unittest
 ```
+* sqlite3
+```
+pip install sqlite3
+```
 
 ## Running the code
 
