@@ -1,6 +1,5 @@
+import sqlite3
 import requests
-import pandas as pd
-import sqlalchemy as db
 from names_dataset import NameDataset, NameWrapper
 
 
@@ -9,7 +8,16 @@ class Names:
     nd = NameDataset(load_last_names=False)
 
     def __init__(self):
-        engine = db.create_engine("put something here")
+        self.conn = sqlite3.connect('name_program.db')
+        self.conn.execute('''CREATE TABLE IF NOT EXISTS names_info
+                     (ID INT UNSIGNED NOT NULL auto_increment,
+                     NAME VARCHAR(255) default NULL,
+                     GENDER VARCHAR(255) default NULL,
+                     COUNTRY VARCHAR(255) default NULL );''')
+
+    def insert_into_table(self, name, gender, country):
+        self.conn.execute("INSERT INTO names_info (NAME,GENDER,COUNTRY) \
+                     VALUES ('{}', '{}', '{}')".format(name, gender, country));
 
     def start_program(self):
         print('Welcome to our Name Finder!')
@@ -49,7 +57,7 @@ class Names:
             if choice == 'no':
                 done = True
 
-        print(Names.end_message)
+        self.end_program()
 
     def find_origin(self):
         done = False
@@ -60,10 +68,14 @@ class Names:
             while not name.isalpha():
                 name = input('Please enter a valid name: ').lower()
 
+            name = name[0].upper() + name[1:]
             name_info = NameWrapper(Names.nd.search(name)).describe
             comma_index = name_info.find(',')
-            print('The name ' + name[0].upper() + name[1:] + ' originates from', end=' ')
-            print(name_info[comma_index+2:])
+            gender = name_info[:comma_index]
+            country = name_info[comma_index+2:]
+            print('The name ' + name[0].upper() + name[1:] + ' originates from', country)
+
+            self.insert_into_table(name, gender, country)
 
             choice = input(
                 'Would you like to choose another name? (yes/no): '
@@ -164,3 +176,18 @@ class Names:
                 if favorite == 'yes':
                     has_favorite = True
                     self.find_origin()
+
+    def end_program(self):
+        cursor = self.conn.cursor()
+
+        cursor.execute("SELECT * FROM names_info")
+        myresult = cursor.fetchall()
+
+        print("Here is an overview of your usage of this program: ")
+        for tup in myresult:
+            print(tup)
+
+        self.conn.execute('''DROP TABLE names_info;''')
+
+        self.conn.close()
+        print(Names.end_message)
