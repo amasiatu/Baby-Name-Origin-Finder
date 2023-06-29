@@ -10,10 +10,11 @@ class Names:
     def __init__(self):
         self.conn = sqlite3.connect('name_program.db')
         self.conn.execute('''CREATE TABLE IF NOT EXISTS names_info
-                     (ID INT PRIMARY KEY default NULL,
-                     NAME VARCHAR(255) default NULL,
-                     GENDER VARCHAR(255) default NULL,
-                     COUNTRY VARCHAR(255) default NULL );''')
+                          (id INTEGER,
+                          NAME VARCHAR(255) default NULL,
+                          GENDER VARCHAR(255) default NULL,
+                          COUNTRY VARCHAR(255) default NULL,
+                          PRIMARY KEY (ID));''')
 
     def insert_into_table(self, name, gender, country):
         self.conn.execute("INSERT INTO names_info (NAME,GENDER,COUNTRY) \
@@ -69,15 +70,12 @@ class Names:
             while not name.isalpha():
                 name = input('Please enter a valid name: ').lower()
 
-            name = name[0].upper() + name[1:]
-            name_info = NameWrapper(Names.nd.search(name)).describe
-            comma_index = name_info.find(',')
-            gender = name_info[:comma_index]
-            country = name_info[comma_index+2:]
-            print('The name ' + name[0].upper() + name[1:] +
+            #call
+            (name, gender, country) = self.get_name_gender_country(name)
+            print('The name ' + name +
                   ' originates from', country)
 
-            Names.insert_into_table(name, gender, country)
+            self.insert_into_table(name, gender, country)
 
             choice = input(
                 'Would you like to choose another name? (yes/no): '
@@ -88,6 +86,15 @@ class Names:
 
             if choice == 'no':
                 done = True
+    
+    def get_name_gender_country(self, name):
+        name = name[0].upper() + name[1:]
+        name_info = NameWrapper(Names.nd.search(name)).describe
+        comma_index = name_info.find(',')
+        gender = name_info[:comma_index]
+        country = name_info[comma_index+2:]
+        return (name, gender, country)
+
 
     def find_names(self):
         country_codes = Names.nd.get_country_codes(alpha_2=True)
